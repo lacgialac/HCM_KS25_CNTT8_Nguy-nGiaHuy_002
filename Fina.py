@@ -116,7 +116,12 @@ class StudentManager():
         if found==False:
             print(f"Không timg thấy sinh viên với tên {Student_name}")
             return
-                    
+        
+    def check_id_dupliucate(self, student_id):
+        for item in self.Students:
+            if item.id==student_id:
+                return False
+        return True   
         
 manager=StudentManager()    
 while True :
@@ -147,8 +152,15 @@ while True :
             
             try:
                 student_id=input("nhập vào id học sinh mới: ")
+                
+
                 if student_id=="":
                     print("id học sinh không được bỏ trống !")
+                    continue
+                
+                found=manager.check_id_dupliucate(student_id)
+                if found==False:
+                    print("mã sinh viên này đã tồn tại vui lòng nhập lại !!!")
                     continue
             
                 student_name=input("nhập vào tên học sinh mới: ")
